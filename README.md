@@ -1,2 +1,2 @@
-# puppet-nextcloud
+# Puppet Nextcloud
 Puppet module for deploying Nextcloud 11
