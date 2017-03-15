@@ -22,6 +22,8 @@ class nextcloud::vhost {
   # Required Apache modules
   class { 'apache::mod::ssl': }
   class { 'apache::mod::headers': }
+  class { 'apache::mod::rewrite': }
+  class { 'apache::mod::php': }
 
   # Redirect requests to SSL
   apache::vhost { 'nextcloud-http':

@@ -4,6 +4,17 @@ class nextcloud::php {
     config_root => '/etc/php/7.0',
   }->
   class { '::php':
-    manage_repos => true
+    manage_repos => true,
+    extensions   => {
+        mysql     => {},
+        ldap      => {},
+        zip       => {},
+        dom       => {},
+        xmlwriter => {},
+        xmlreader => {},
+        gd        => {},
+        curl      => {},
+        mbstring  => {},
+    },
   }
 }
