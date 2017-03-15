@@ -24,9 +24,6 @@ class nextcloud(
   $config_file   = $::nextcloud::params::config_file,
 ) inherits nextcloud::params {
 
-  class { 'apache':
-    default_vhost => false,
-  } ->
   class { 'nextcloud::install': } ->
   class { 'nextcloud::vhost': } ->
   class { 'nextcloud::config': }

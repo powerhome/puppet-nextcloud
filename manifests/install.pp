@@ -8,6 +8,11 @@ class nextcloud::install {
     revision => "v${::nextcloud::repo_version}",
   }
 
+  # Install Apache
+  class { 'apache':
+    default_vhost => false,
+  }
+
   # Set ownership on the docroot
   exec { 'nextcloud_docroot':
     command => "/usr/sbin/chown -R ${::nextcloud::www_user}:${::nextcloud::www_group} ${::nextcloud::docroot}",
