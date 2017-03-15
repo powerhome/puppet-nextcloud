@@ -41,7 +41,7 @@ class nextcloud::vhost {
     ssl             => true,
     ssl_cert        => $::nextcloud::ssl_cert_path,
     ssl_key         => $::nextcloud::ssl_key_path,
-    ssl_ca          => $::nextcloud::ssl_dir,
+    ssl_ca          => $::nextcloud::ssl_cert_path,
     options         => [
       '+FollowSymLinks',
     ],
