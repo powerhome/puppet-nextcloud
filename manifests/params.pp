@@ -1,6 +1,7 @@
 class nextcloud::params {
-  $repo_manage = true
-  $repo_url    = '[arch=amd64] https://repo.morph027.de/ubuntu'
-  $repo_key    = 'https://repo.morph027.de/gpg.key'
-  $repo_key_id = '02BD5FB7BA4650D50ED69002797DFE3F4F80269B'
+  $repo_tag  = 'v11.0.2'
+  $repo_url  = 'git://github.com/powerhome/puppet-nextcloud.git'
+  $docroot   = '/var/www/nextcloud'
+  $www_user  = 'www-data'
+  $www_group = 'www-data'
 }

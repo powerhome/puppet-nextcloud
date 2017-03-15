@@ -1,8 +1,9 @@
 class nextcloud(
-  $repo_manage = $::nextcloud::params::repo_manage,
-  $repo_url    = $::nextcloud::params::repo_url,
-  $repo_key    = $::nextcloud::params::repo_key,
-  $repo_key_id = $::nextcloud::params::repo_key_id,
+  $repo_tag  = $::nextcloud::params::repo_tag,
+  $repo_url  = $::nextcloud::params::repo_url,
+  $docroot   = $::nextcloud::params::docroot,
+  $www_user  = $::nextcloud::params::www_user,
+  $www_group = $::nextcloud::params::www_group,
 ) inherits nextcloud::params {
 
   class { 'nextcloud::repo': } ->
