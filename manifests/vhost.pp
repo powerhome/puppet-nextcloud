@@ -39,8 +39,8 @@ class nextcloud::vhost {
     manage_docroot  => false,
     servername      => $::nextcloud::www_url,
     ssl             => true,
-    ssl_cert        => $::nextcloud::ssl_cert,
-    ssl_key         => $::nextcloud::ssl_key,
+    ssl_cert        => $::nextcloud::ssl_cert_path,
+    ssl_key         => $::nextcloud::ssl_key_path,
     ssl_ca          => $::nextcloud::ssl_dir,
     options         => [
       '+FollowSymLinks',
