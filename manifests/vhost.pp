@@ -23,7 +23,9 @@ class nextcloud::vhost {
   class { 'apache::mod::ssl': }
   class { 'apache::mod::headers': }
   class { 'apache::mod::rewrite': }
-  class { 'apache::mod::php': }
+  apache::mod { 'libapache2-mod-php7.0':
+    loadfile_name => 'php7.0',
+  }
 
   # Redirect requests to SSL
   apache::vhost { 'nextcloud-http':
