@@ -5,7 +5,7 @@ class nextcloud::install {
     ensure   => present,
     provider => git,
     source   => $::nextcloud::repo_url,
-    revision => $::nextcloud::repo_tag,
+    revision => "v${::nextcloud::repo_version}",
   }
 
   # Set ownership on the docroot
