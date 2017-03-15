@@ -6,6 +6,9 @@ class nextcloud(
   $www_group = $::nextcloud::params::www_group,
 ) inherits nextcloud::params {
 
-  class { 'nextcloud::repo': } ->
+  class { 'apache':
+    default_vhost => false,
+  } ->
+  class { 'nextcloud::install': } ->
 
 }
