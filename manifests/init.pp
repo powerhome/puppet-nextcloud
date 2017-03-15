@@ -13,7 +13,7 @@ class nextcloud(
   $instance_id,
   $instance_salt,
   $instance_secret,
-  $repo_tag      = $::nextcloud::params::repo_tag,
+  $repo_version  = $::nextcloud::params::repo_version,
   $repo_url      = $::nextcloud::params::repo_url,
   $docroot       = $::nextcloud::params::docroot,
   $www_user      = $::nextcloud::params::www_user,
