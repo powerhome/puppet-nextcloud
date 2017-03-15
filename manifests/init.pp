@@ -28,5 +28,6 @@ class nextcloud(
     default_vhost => false,
   } ->
   class { 'nextcloud::install': } ->
-  class { 'nextcloud::vhost': }
+  class { 'nextcloud::vhost': } ->
+  class { 'nextcloud::config': }
 }
