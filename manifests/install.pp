@@ -11,6 +11,7 @@ class nextcloud::install {
   # Install Apache
   class { 'apache':
     default_vhost => false,
+    mpm_module    => 'prefork',
   }
 
   # Set ownership on the docroot
