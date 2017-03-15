@@ -28,6 +28,7 @@ class nextcloud::vhost {
     servername      => $::nextcloud::www_url,
     port            => '80',
     docroot         => $::nextcloud::docroot,
+    manage_docroot  => false,
     redirect_status => 'permanent',
     redirect_dest   => "https://${::nextcloud::www_url}/",
     require         => [File[$::nextcloud::ssl_cert_path], File[$::nextcloud::ssl_key_path]],
