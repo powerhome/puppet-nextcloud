@@ -3,7 +3,7 @@ class nextcloud::config {
   # Deploy the NextCloud configuration
   file { $::nextcloud::config_file:
     ensure  => file,
-    user    => $::nextcloud::www_user,
+    owner   => $::nextcloud::www_user,
     group   => $::nextcloud::www_group,
     content => epp('nextcloud/config.php.epp', {
         instance_id      => $::nextcloud::instance_id,
