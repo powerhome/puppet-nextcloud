@@ -22,7 +22,6 @@ class nextcloud::vhost {
   # Required Apache modules
   class { 'apache::mod::ssl': }
   class { 'apache::mod::headers': }
-  class { 'apache::mod::dir': }
   class { 'apache::mod::rewrite': }
   apache::mod { 'php7.0':
     package => 'libapache2-mod-php7.0',
