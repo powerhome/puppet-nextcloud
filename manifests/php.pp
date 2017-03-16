@@ -6,17 +6,16 @@ class nextcloud::php {
   class { '::php':
     manage_repos => true,
     extensions   => {
-        mysql     => {},
-        ldap      => {},
-        zip       => {},
-        gd        => {},
-        xml       => {},
-        curl      => {},
-        mbstring  => {},
-        intl      => {},
-        mcrypt    => {},
-        imap      => {},
-        smbclient => {},
+        mysqli   => {},
+        ldap     => {},
+        zip      => {},
+        gd       => {},
+        xml      => {},
+        curl     => {},
+        mbstring => {},
+        intl     => {},
+        mcrypt   => {},
+        imap     => {},
     },
   }
 }
