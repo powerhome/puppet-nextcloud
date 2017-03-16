@@ -13,6 +13,10 @@ class nextcloud::php {
         xml       => {},
         curl      => {},
         mbstring  => {},
+        intl      => {},
+        mcrypt    => {},
+        imap      => {},
+        smbclient => {},
     },
   }
 }
