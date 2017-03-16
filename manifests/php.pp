@@ -6,9 +6,7 @@ class nextcloud::php {
   class { '::php':
     manage_repos => true,
     extensions   => {
-        mysql     => {
-          so_name => 'pdo_mysql',
-        },
+        mysql     => {},
         ldap      => {},
         zip       => {},
         gd        => {},
