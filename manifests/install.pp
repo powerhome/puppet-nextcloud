@@ -19,9 +19,22 @@ class nextcloud::install {
     ensure => present,
   }
 
+  # Deploy permissions script
+  file { $::nextcloud::permissions_script:
+    ensure  => file,
+    mode    => '0755',
+    content => epp('nextcloud/permissions.sh.epp', {
+        docroot   => $::nextcloud::docroot,
+        www_user  => $::nextcloud::www_user,
+        www_group => $::nextcloud::www_group,
+    }),
+    require => [Vcsrepo[$::nextcloud::docroot], Class['Apache']],
+  }
+
   # Set ownership on the docroot
   exec { 'nextcloud_docroot':
-    command => "/bin/chown -R ${::nextcloud::www_user}:${::nextcloud::www_group} ${::nextcloud::docroot}",
-    unless  => "/usr/bin/test ! -z \"$(/bin/ls -ltrhad ${::nextcloud::docroot} | /bin/grep '${::nextcloud::www_user} ${::nextcloud::www_group}')\"",
+    command => "/bin/bash ${nextcloud::permissions_script}",
+    unless  => "/usr/bin/test ! -z \"$(/bin/ls -ltrhad ${::nextcloud::docroot} | /bin/grep 'root ${::nextcloud::www_group}')\"",
+    require => File[$::nextcloud::permissions_script],
   }
 }
