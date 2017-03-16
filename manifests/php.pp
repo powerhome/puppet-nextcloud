@@ -1,13 +1,13 @@
 class nextcloud::php {
 
-  apt::ppa { 'ppa:ondrej/php': }
-  apt::key { 'ppa:ondrej/php':
-    key => '30B933D80FCE3D981A2D38FB0C99B70EF4FCBB07',
+  apt::ppa { "${::nextcloud::php_ppa}": }
+  apt::key { "${::nextcloud::php_ppa}":
+    key => $::nextcloud::php_ppa_key,
   }
 
   class { '::php::globals':
-    php_version => '7.0',
-    config_root => '/etc/php/7.0',
+    php_version => $::nextcloud::php_version,
+    config_root => "/etc/php/${::nextcloud::php_version}",
   }->
   class { '::php':
     manage_repos => false,
@@ -25,5 +25,6 @@ class nextcloud::php {
         mcrypt   => {},
         imap     => {},
     },
+    require      => [Apt::Ppa[$::nextcloud::php_ppa], Apt::Key[$::nextcloud::php_ppa]]
   }
 }

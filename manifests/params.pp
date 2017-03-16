@@ -9,4 +9,7 @@ class nextcloud::params {
   $ssl_key_path       = "${ssl_dir}/nextcloud.key"
   $config_file        = "${docroot}/config/config.php"
   $permissions_script = "/var/www/nextcloud_permissions.sh"
+  $php_ppa            = 'ppa:ondrej/php'
+  $php_ppa_key        = '30B933D80FCE3D981A2D38FB0C99B70EF4FCBB07'
+  $php_version        = '7.0'
 }
