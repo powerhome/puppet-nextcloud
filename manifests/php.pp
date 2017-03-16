@@ -1,8 +1,10 @@
 class nextcloud::php {
 
   apt::ppa { "${::nextcloud::php_ppa}": }
-  apt::key { "${::nextcloud::php_ppa}":
-    key => $::nextcloud::php_ppa_key,
+  $::nextcloud::php_ppa_keys.each |$key| {
+    apt::key { $key:
+      key => $key,
+    }
   }
 
   class { '::php::globals':
@@ -27,6 +29,6 @@ class nextcloud::php {
         mcrypt   => {},
         imap     => {},
     },
-    require      => [Apt::Ppa[$::nextcloud::php_ppa], Apt::Key[$::nextcloud::php_ppa]]
+    require      => Apt::Ppa[$::nextcloud::php_ppa],
   }
 }
