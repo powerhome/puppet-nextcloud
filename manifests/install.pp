@@ -19,6 +19,16 @@ class nextcloud::install {
     ensure => present,
   }
 
+  # Deploy command line tool wrapper
+  file { '/usr/bin/occ':
+    ensure  => file,
+    mode    => '0755',
+    content => epp('nextcloud/occ.epp', {
+        docroot  => $::nextcloud::docroot,
+        www_user => $::nextcloud::www_user, 
+    }),
+  }
+
   # Deploy permissions script
   file { $::nextcloud::permissions_script:
     ensure  => file,
