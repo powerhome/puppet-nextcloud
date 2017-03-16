@@ -11,6 +11,8 @@ class nextcloud::php {
   }->
   class { '::php':
     manage_repos => false,
+    fpm          => true,
+    composer     => false,
     extensions   => {
         mysql    => {
           so_name => 'mysqli',
