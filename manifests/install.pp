@@ -14,6 +14,11 @@ class nextcloud::install {
     mpm_module    => 'prefork',
   }
 
+  # We need MySQL command line client
+  package { 'mysql-client':
+    ensure => present,
+  }
+
   # Set ownership on the docroot
   exec { 'nextcloud_docroot':
     command => "/bin/chown -R ${::nextcloud::www_user}:${::nextcloud::www_group} ${::nextcloud::docroot}",
