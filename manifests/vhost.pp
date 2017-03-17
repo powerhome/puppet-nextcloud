@@ -19,10 +19,19 @@ class nextcloud::vhost {
     require => File[$::nextcloud::ssl_dir],
   }
 
+  # Disabled Apache modules
+  $::nextcloud::apache_disabled_mods.each |$dismod| {
+    apache::mod { $dismod:
+      package_ensure => absent,
+    }
+  }
+
   # Required Apache modules
-  class { 'apache::mod::ssl': }
-  class { 'apache::mod::headers': }
-  class { 'apache::mod::rewrite': }
+  $::nextcloud::apache_enabled_mods.each |$enmod| {
+    class { "apache::mod::${enmod}": }
+  }
+
+  # Custom install of PHP module
   apache::mod { 'php7.0':
     package => 'libapache2-mod-php7.0',
     lib     => 'libphp7.0.so',
