@@ -63,7 +63,7 @@ class nextcloud::vhost {
         ],
         custom_fragment => join([
           '',
-          '<IfModule mod_dav.c>',
+          '    <IfModule mod_dav.c>',
           '      Dav off',
           '    </IfModule>'
         ], "\n"),
