@@ -62,9 +62,10 @@ class nextcloud::vhost {
           "HTTP_HOME ${::nextcloud::docroot}"
         ],
         custom_fragment => join([
+          '',
           '<IfModule mod_dav.c>',
-          '  Dav off',
-          '</IfModule>'
+          '      Dav off',
+          '    </IfModule>'
         ], "\n"),
       },
     ],
