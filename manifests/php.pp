@@ -29,6 +29,9 @@ class nextcloud::php {
         imagick   => {
           package_prefix => 'php-',
         },
+        opcache   => {
+          zend => true,
+        },
         bz2       => {},
         smbclient => {
           package_prefix => 'php-',
