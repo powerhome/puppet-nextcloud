@@ -10,4 +10,6 @@ class nextcloud::params {
   $config_file        = "${docroot}/config/config.php"
   $permissions_script = "/var/www/nextcloud_permissions.sh"
   $php_version        = '7.0'
+  $php_ppa            = 'ppa:ondrej/php'
+  $php_ppa_key        = '14AA40EC0831756756D7F66C4F4EA0AAE5267A6C'
 }
