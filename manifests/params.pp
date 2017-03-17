@@ -16,18 +16,5 @@ class nextcloud::params {
     'ssl',
     'headers',
     'rewrite',
-    'access_compat',
-    'auth_basic',
-    'authn_core',
-    'authn_file',
-    'authz_groupfile',
-    'authz_user',
-    'autoindex',
-    'cgi',
-    'deflate',
-    'dir',
-    'env',
-    'negotiation',
-    'reqtimeout'
   ]
 }

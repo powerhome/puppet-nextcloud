@@ -12,7 +12,6 @@ class nextcloud::install {
   class { 'apache':
     default_vhost => false,
     mpm_module    => 'prefork',
-    default_mods  => false,
   }
 
   # We need MySQL command line client
