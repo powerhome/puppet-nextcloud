@@ -7,12 +7,10 @@ class nextcloud::php {
   class { '::php::globals':
     php_version => $::nextcloud::php_version,
     config_root => "/etc/php/${::nextcloud::php_version}",
-    fpm         => false,
-    composer    => false,
   }->
   class { '::php':
     manage_repos => false,
-    fpm          => true,
+    fpm          => false,
     composer     => false,
     extensions   => {
         mysql     => {
