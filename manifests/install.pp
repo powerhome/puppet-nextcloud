@@ -12,6 +12,7 @@ class nextcloud::install {
   class { 'apache':
     default_vhost => false,
     mpm_module    => 'prefork',
+    default_mods  => false,
   }
 
   # We need MySQL command line client
@@ -25,7 +26,7 @@ class nextcloud::install {
     mode    => '0755',
     content => epp('nextcloud/occ.epp', {
         docroot  => $::nextcloud::docroot,
-        www_user => $::nextcloud::www_user, 
+        www_user => $::nextcloud::www_user,
     }),
   }
 
