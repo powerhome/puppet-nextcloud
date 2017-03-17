@@ -51,12 +51,12 @@ class nextcloud::vhost {
     ssl_cert        => $::nextcloud::ssl_cert_path,
     ssl_key         => $::nextcloud::ssl_key_path,
     ssl_ca          => $::nextcloud::ssl_cert_path,
-    directoryindex  => 'index.php index.html index.cgi index.pl index.php index.xhtml index.htm',
     directories     => [
       {
         path            => $::nextcloud::docroot,
         options         => ['+FollowSymLinks'],
         allow_overide   => 'All',
+        directoryindex  => 'index.php index.html index.cgi index.pl index.php index.xhtml index.htm',
         setenv          => [
           "HOME ${::nextcloud::docroot}",
           "HTTP_HOME ${::nextcloud::docroot}"
