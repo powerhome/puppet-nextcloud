@@ -21,8 +21,8 @@ class nextcloud::vhost {
 
   # Disabled Apache modules
   $::nextcloud::apache_disabled_mods.each |$dismod| {
-    apache::mod { $dismod:
-      package_ensure => absent,
+    class { "apache::mod::${dismod}":
+      ensure => absent,
     }
   }
 
