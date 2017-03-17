@@ -1,18 +1,10 @@
 class nextcloud::php {
-
-  apt::ppa { "${::nextcloud::php_ppa}": }
-  $::nextcloud::php_ppa_keys.each |$key| {
-    apt::key { $key:
-      key => $key,
-    }
-  }
-
   class { '::php::globals':
     php_version => $::nextcloud::php_version,
     config_root => "/etc/php/${::nextcloud::php_version}",
   }->
   class { '::php':
-    manage_repos => false,
+    manage_repos => true,
     fpm          => true,
     composer     => false,
     extensions   => {
@@ -29,6 +21,5 @@ class nextcloud::php {
         mcrypt   => {},
         imap     => {},
     },
-    require      => Apt::Ppa[$::nextcloud::php_ppa],
   }
 }
