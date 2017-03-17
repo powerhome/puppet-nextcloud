@@ -65,7 +65,12 @@ class nextcloud::vhost {
     headers         => [
       'always set Strict-Transport-Security "max-age=15552000; includeSubDomains; preload"',
     ],
-    custom_fragment => 'AddType application/x-httpd-php .php',
+    custom_fragment => join([
+      '    AddType application/x-httpd-php .php',
+      '    <IfModule mod_dav.c>',
+      '      Dav off',
+      '    </IfModule>',
+    ]),
     require         => [File[$::nextcloud::ssl_cert_path], File[$::nextcloud::ssl_key_path]],
   }
 }
