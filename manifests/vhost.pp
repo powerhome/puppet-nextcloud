@@ -52,25 +52,26 @@ class nextcloud::vhost {
     ssl_key         => $::nextcloud::ssl_key_path,
     ssl_ca          => $::nextcloud::ssl_cert_path,
     directoryindex  => 'index.php index.html index.cgi index.pl index.php index.xhtml index.htm',
-    options         => [
-      '+FollowSymLinks',
-    ],
-    override        => [
-      'All',
-    ],
-    setenv          => [
-      "HOME ${::nextcloud::docroot}",
-      "HTTP_HOME ${::nextcloud::docroot}"
+    directories     => [
+      {
+        path            => $::nextcloud::docroot,
+        options         => ['+FollowSymLinks'],
+        allow_overide   => 'All',
+        setenv          => [
+          "HOME ${::nextcloud::docroot}",
+          "HTTP_HOME ${::nextcloud::docroot}"
+        ],
+        custom_fragment => join([
+          '<IfModule mod_dav.c>',
+          '  Dav off',
+          '</IfModule>'
+        ], "\n"),
+      },
     ],
     headers         => [
       'always set Strict-Transport-Security "max-age=15552000; includeSubDomains; preload"',
     ],
-    custom_fragment => join([
-      'AddType application/x-httpd-php .php',
-      '<IfModule mod_dav.c>',
-      '  Dav off',
-      '</IfModule>',
-    ], "\n"),
+    custom_fragment => 'AddType application/x-httpd-php .php',
     require         => [File[$::nextcloud::ssl_cert_path], File[$::nextcloud::ssl_key_path]],
   }
 }
