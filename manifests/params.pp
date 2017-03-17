@@ -12,6 +12,5 @@ class nextcloud::params {
   $php_version          = '7.0'
   $php_ppa              = 'ppa:ondrej/php'
   $php_ppa_key          = '14AA40EC0831756756D7F66C4F4EA0AAE5267A6C'
-  $apache_disabled_mods = ['dav', 'dav_fs']
   $apache_enabled_mods  = ['ssl', 'headers', 'rewrite']
 }

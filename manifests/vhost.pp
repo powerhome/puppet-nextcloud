@@ -19,13 +19,6 @@ class nextcloud::vhost {
     require => File[$::nextcloud::ssl_dir],
   }
 
-  # Disabled Apache modules
-  $::nextcloud::apache_disabled_mods.each |$dismod| {
-    class { "apache::mod::${dismod}":
-      ensure => absent,
-    }
-  }
-
   # Required Apache modules
   $::nextcloud::apache_enabled_mods.each |$enmod| {
     class { "apache::mod::${enmod}": }
