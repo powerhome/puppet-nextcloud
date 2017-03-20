@@ -28,7 +28,7 @@ class nextcloud(
 
   class { 'nextcloud::source': } ->
   class { 'nextcloud::config': } ->
+  class { 'nextcloud::php': } ->
   class { 'nextcloud::install': } ->
-  class { 'nextcloud::vhost': } ->
-  class { 'nextcloud::php': }
+  class { 'nextcloud::vhost': }
 }
