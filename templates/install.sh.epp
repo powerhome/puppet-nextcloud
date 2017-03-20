@@ -5,11 +5,13 @@ INSTALLED_TIMESTAMP="$(mysql -sN -u <%= $db_user %> -p<%= $db_pass %> -h <%= $db
 
 # Update config file to show installation completed
 update_config() {
-  /bin/cat <%= $config_file %> | /bin/sed "s/'installed' => false/'installed' => true/g" > <%= $config_file %>
+  /bin/sed -i "s/'installed' => false/'installed' => true/g" <%= $config_file %>
+  echo "Updating <%= $config_file %>: installed = true"
 }
 
 # Installed date populated, installation is complete
 if [ ! -z "${INSTALLED_TIMESTAMP}" ]; then
+  echo "Database installation already completed at: ${INSTALLED_TIMESTAMP}"
   update_config
 
 # Installation must be completed
@@ -25,6 +27,7 @@ else
     echo "Database installation failed!"
     exit 1
   fi
+  echo "Database installation complete"
 
   # Install complete
   update_config
