@@ -1,9 +1,4 @@
 class nextcloud::php {
-  apt::key { $::nextcloud::php_ppa_key: }
-  apt::ppa { $::nextcloud::php_ppa:
-    require => Apt::Key[$::nextcloud::php_ppa_key],
-  }
-
   class { '::php::globals':
     php_version => $::nextcloud::php_version,
     config_root => "/etc/php/${::nextcloud::php_version}",
@@ -49,6 +44,5 @@ class nextcloud::php {
           package_prefix => 'php-',
         },
     },
-    require       => Apt::Ppa[$::nextcloud::php_ppa],
   }
 }
