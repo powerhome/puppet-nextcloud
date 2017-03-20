@@ -36,7 +36,7 @@ class nextcloud::install {
   # Run installation
   exec { 'nextcloud_install':
     command => "/usr/bin/occ maintenance:install --data-dir \"${::nextcloud::data_dir}\" ${install_db} ${install_admin}",
-    unless  => '/usr/bin/occ status',
+    unless  => '/usr/bin/test -z "$(/usr/bin/occ status | /bin/grep "installed: false")"',
     require => File['/usr/bin/occ'],
   }
 
