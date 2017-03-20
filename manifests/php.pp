@@ -9,17 +9,18 @@ class nextcloud::php {
     config_root => "/etc/php/${::nextcloud::php_version}",
   }->
   class { '::php':
-    manage_repos => false,
-    fpm          => false,
-    composer     => false,
-    settings     => {
+    manage_repos  => false,
+    fpm           => false,
+    composer      => false,
+    apache_config => true,
+    settings      => {
         'PHP/max_execution_time'  => '3500',
         'PHP/max_input_time'      => '3600',
         'PHP/memory_limit'        => '512M',
         'PHP/post_max_size'       => '1100M',
         'PHP/upload_max_filesize' => '1000M',
     },
-    extensions   => {
+    extensions    => {
         mysql     => {
           so_name => 'mysqli',
         },
@@ -48,6 +49,6 @@ class nextcloud::php {
           package_prefix => 'php-',
         },
     },
-    require      => Apt::Ppa[$::nextcloud::php_ppa],
+    require       => Apt::Ppa[$::nextcloud::php_ppa],
   }
 }
