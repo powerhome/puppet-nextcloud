@@ -29,6 +29,7 @@ class nextcloud::vhost {
     package => 'libapache2-mod-php7.0',
     lib     => 'libphp7.0.so',
     id      => 'php7_module',
+    require => Class['php'],
   }
 
   # Redirect requests to SSL
