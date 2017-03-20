@@ -39,7 +39,7 @@ else
     echo -ne "FAILED"
     exit 1
   fi
-  echo "SUCCESS"
+  echo -ne "SUCCESS"
 fi
 
 exit 0
