@@ -33,7 +33,8 @@ class nextcloud::install {
   # Run installation
   exec { 'nextcloud_install':
     command => "/bin/bash ${::nextcloud::install_script}",
-    unless  => '/usr/bin/test -z "$(/usr/bin/occ status | /bin/grep "installed: false")"',
+    unless  => "/bin/bash ${::nextcloud::check_install_script}",
+    unless  => '/usr/bin/test ! -z "$(/usr/bin/occ status | /bin/grep "installed: true")"',
     require => [File['/usr/bin/occ'], File[$::nextcloud::install_script]],
   }
 
