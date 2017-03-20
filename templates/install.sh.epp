@@ -1,15 +1,34 @@
 #!/bin/bash
 
-# Populate the database
-/usr/bin/occ maintenance:install --database "mysql" \
---database-host "<%= $db_host %>" --database-name "<%= $db_name %>" --database-user "<%= $db_user %>" --database-pass "<%= $db_pass %>" \
---admin-user "<%= $admin_user %>" --admin-pass "<%= $admin_passwd %>"
+# Query the database directly to check installation status (this might be a secondary node)
+INSTALLED_TIMESTAMP="$(mysql -sN -u <%= $db_user %> -p<%= $db_pass %> -h <%= $db_host %> -e "select configvalue from <%= $db_name %>.oc_appconfig where appid='core' and configkey='installedat'")"
 
-# Database population must succeed
-if [ "$?" != "0" ]; then
-  echo "Database installation failed!"
-  exit 1
+# Update config file to show installation completed
+update_config() {
+  /bin/cat <%= $config_file %> | /bin/sed "s/'installed' => false/'installed' => true/g" > <%= $config_file %>
+}
+
+# Installed date populated, installation is complete
+if [ ! -z "${INSTALLED_TIMESTAMP}" ]; then
+  update_config
+
+# Installation must be completed
+else
+
+  # Populate the database
+  /usr/bin/occ maintenance:install --database "mysql" \
+  --database-host "<%= $db_host %>" --database-name "<%= $db_name %>" --database-user "<%= $db_user %>" --database-pass "<%= $db_pass %>" \
+  --admin-user "<%= $admin_user %>" --admin-pass "<%= $admin_passwd %>"
+
+  # Database population must succeed
+  if [ "$?" != "0" ]; then
+    echo "Database installation failed!"
+    exit 1
+  fi
+
+  # Install complete
+  update_config
+
 fi
 
-# Update config.php to reflect completed installation
-/bin/cat <%= $config_file %> | /bin/sed "s/'installed' => false/'installed' => true/g" > <%= $config_file %>
+exit 0
