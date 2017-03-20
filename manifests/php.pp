@@ -12,6 +12,13 @@ class nextcloud::php {
     manage_repos => false,
     fpm          => false,
     composer     => false,
+    settings     => {
+        'PHP/max_execution_time'  => '3500',
+        'PHP/max_input_time'      => '3600',
+        'PHP/memory_limit'        => '512M',
+        'PHP/post_max_size'       => '1100M',
+        'PHP/upload_max_filesize' => '1000M',
+    },
     extensions   => {
         mysql     => {
           so_name => 'mysqli',
