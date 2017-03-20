@@ -1,45 +1,62 @@
 #!/bin/bash
+LOGFILE=/var/log/nextcloud_install.log
+INSTALL_TMP=/tmp/nc_install
+UPGRADE_TMP=/tmp/nc_upgrade
+
+echo "Beginning Nextcloud database installation..." &> $LOGFILE
 
 # Query the database directly to check installation status (this might be a secondary node)
 INSTALLED_TIMESTAMP="$(mysql -sN -u <%= $db_user %> -p<%= $db_pass %> -h <%= $db_host %> -e "select configvalue from <%= $db_name %>.oc_appconfig where appid='core' and configkey='installedat'")"
 
+cleanup() {
+  echo -n "Cleaning up installation temp files..." &>> $LOGFILE
+  rm -f $INSTALL_TMP
+  rm -f $UPGRADE_TMP
+  echo -ne "SUCCESS\n" &>> $LOGFILE
+  echo "Installation complete!" >> $LOGFILE
+}
+
 # Update config to show uninstalled to installation can proceed
 set_uninstalled() {
   /bin/sed -i "s/'installed' => true/'installed' => false/g" <%= $config_file %>
-  echo "Updating <%= $config_file %>: installed = false"
+  echo "Updating <%= $config_file %>: installed = false" &>> $LOGFILE
 }
 
 # Installed date populated, installation is complete
 if [ ! -z "${INSTALLED_TIMESTAMP}" ]; then
-  echo "Database installation already completed at: ${INSTALLED_TIMESTAMP}"
+  echo "Database installation already completed at: ${INSTALLED_TIMESTAMP}" &>> $LOGFILE
 
 # Installation must be completed
 else
   set_uninstalled
 
   # Populate the database
-  echo -n "Installing Nextcloud database..."
+  echo -n "Installing Nextcloud database..." &>> $LOGFILE
   /usr/bin/occ maintenance:install --database "mysql" \
   --database-host "<%= $db_host %>" --database-name "<%= $db_name %>" --database-user "<%= $db_user %>" --database-pass "<%= $db_pass %>" \
-  --admin-user "<%= $admin_user %>" --admin-pass "<%= $admin_passwd %>" &> /dev/null
+  --admin-user "<%= $admin_user %>" --admin-pass "<%= $admin_passwd %>" &> $INSTALL_TMP
 
   # Database population must succeed
   if [ "$?" != "0" ]; then
-    echo -ne "FAILED\n"
+    echo -ne "FAILED\n" &>> $LOGFILE
+    cat $INSTALL_TMP >> $LOGFILE
     exit 1
   fi
-  echo -ne "SUCCESS\n"
+  echo -ne "SUCCESS\n" &>> $LOGFILE
+  cat $INSTALL_TMP >> $LOGFILE
 
   # Run the post install upgrade command
-  echo -n "Upgrading Nextcloud database..."
-  /usr/bin/occ upgrade &> /dev/null
+  echo -n "Upgrading Nextcloud database..." &>> $LOGFILE
+  /usr/bin/occ upgrade &> $UPGRADE_TMP
 
   # Database upgrade must succeed
   if [ "$?" != "0" ]; then
-    echo -ne "FAILED\n"
+    echo -ne "FAILED\n" &>> $LOGFILE
+    cat $UPGRADE_TMP >> $LOGFILE
     exit 1
   fi
-  echo -ne "SUCCESS\n"
+  echo -ne "SUCCESS\n" &>> $LOGFILE
+  cat $UPGRADE_TMP >> $LOGFILE
 fi
 
 exit 0
