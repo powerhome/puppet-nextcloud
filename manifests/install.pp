@@ -29,6 +29,17 @@ class nextcloud::install {
     }),
   }
 
+  # Install command line parameters
+  $install_db = "--database \"mysql\" --database-name \"${::nextcloud::db_name}\" --database-user \"${::nextcloud::db_user}\" --database-pass \"${::nextcloud::db_pass}\""
+  $install_admin = "--admin-user \"${::nextcloud::admin_user}\" --admin-pass \"${::nextcloud::admin_passwd}\""
+
+  # Run installation
+  exec { 'nextcloud_install':
+    command => "/usr/bin/occ maintenance:install --data-dir \"${::nextcloud::data_dir}\" ${install_db} ${install_admin}",
+    unless  => '/usr/bin/occ status',
+    require => File['/usr/bin/occ'],
+  }
+
   # Deploy permissions script
   file { $::nextcloud::permissions_script:
     ensure  => file,

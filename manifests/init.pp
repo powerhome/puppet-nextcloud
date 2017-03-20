@@ -2,6 +2,8 @@ class nextcloud(
   $ssl_cert,
   $ssl_key,
   $www_url,
+  $admin_user,
+  $admin_passwd,
   $datastore_bucket,
   $datastore_url,
   $datastore_key,

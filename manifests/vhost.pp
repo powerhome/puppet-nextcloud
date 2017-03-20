@@ -56,7 +56,6 @@ class nextcloud::vhost {
         path            => $::nextcloud::docroot,
         options         => ['+FollowSymLinks'],
         allow_overide   => ['All'],
-        require         => undef,
         directoryindex  => 'index.php index.html index.cgi index.pl index.php index.xhtml index.htm',
         setenv          => [
           "HOME ${::nextcloud::docroot}",
