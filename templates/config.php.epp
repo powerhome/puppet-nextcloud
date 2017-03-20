@@ -17,7 +17,7 @@ $CONFIG = array (
   'dbuser' => '<%= $db_user %>',
   'dbpassword' => '<%= $db_pass %>',
   'logtimezone' => 'UTC',
-  'installed' => false,
+  'installed' => true,
   'ldapIgnoreNamingRules' => false,
   'ldapProviderFactory' => '\\OCA\\User_LDAP\\LDAPProviderFactory',
   'mail_smtpmode' => 'php',
