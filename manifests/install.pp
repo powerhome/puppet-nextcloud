@@ -48,7 +48,7 @@ class nextcloud::install {
   exec { 'nextcloud_install':
     command => "/bin/bash ${::nextcloud::install_script}",
     unless  => '/usr/bin/test -z "$(/usr/bin/occ status | /bin/grep "installed: false")"',
-    require => [File['/usr/bin/occ'], File[$::nextcloud::install_script]],
+    require => [File['/usr/bin/occ'], File[$::nextcloud::install_script], File[$::nextcloud::config_file]],
   }
 
   # Deploy permissions script
