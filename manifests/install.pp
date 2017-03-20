@@ -30,7 +30,7 @@ class nextcloud::install {
   }
 
   # Install command line parameters
-  $install_db = "--database \"mysql\" --database-name \"${::nextcloud::db_name}\" --database-user \"${::nextcloud::db_user}\" --database-pass \"${::nextcloud::db_pass}\""
+  $install_db = "--database \"mysql\" --database-host \"${::nextcloud::db_host}\" --database-name \"${::nextcloud::db_name}\" --database-user \"${::nextcloud::db_user}\" --database-pass \"${::nextcloud::db_pass}\""
   $install_admin = "--admin-user \"${::nextcloud::admin_user}\" --admin-pass \"${::nextcloud::admin_passwd}\""
 
   # Run installation
