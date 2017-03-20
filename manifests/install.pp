@@ -29,15 +29,26 @@ class nextcloud::install {
     }),
   }
 
-  # Install command line parameters
-  $install_db = "--database \"mysql\" --database-host \"${::nextcloud::db_host}\" --database-name \"${::nextcloud::db_name}\" --database-user \"${::nextcloud::db_user}\" --database-pass \"${::nextcloud::db_pass}\""
-  $install_admin = "--admin-user \"${::nextcloud::admin_user}\" --admin-pass \"${::nextcloud::admin_passwd}\""
+  # Installation script
+  file { $::nextcloud::install_script:
+    ensure  => file,
+    mode    => '0755',
+    content => epp('nextcloud/install.sh.epp', {
+      config_file  => $::nextcloud::config_file,
+      db_user      => $::nextcloud::db_user,
+      db_host      => $::nextcloud::db_host,
+      db_name      => $::nextcloud::db_name,
+      db_pass      => $::nextcloud::db_pass,
+      admin_user   => $::nextcloud::admin_user,
+      admin_passwd => $::nextcloud::admin_passwd,
+    }),
+  }
 
   # Run installation
   exec { 'nextcloud_install':
-    command => "/usr/bin/occ maintenance:install --data-dir \"${::nextcloud::data_dir}\" ${install_db} ${install_admin}",
+    command => "/bin/bash ${::nextcloud::install_script}",
     unless  => '/usr/bin/test -z "$(/usr/bin/occ status | /bin/grep "installed: false")"',
-    require => File['/usr/bin/occ'],
+    require => [File['/usr/bin/occ'], File[$::nextcloud::install_script]],
   }
 
   # Deploy permissions script

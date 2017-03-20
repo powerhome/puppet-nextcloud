@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Populate the database
+/usr/bin/occ maintenance:install --database "mysql" \
+--database-host "<%= $db_host %>" --database-name "<%= $db_name %>" --database-user "<%= $db_user %>" --database-pass "<%= $db_pass %>" \
+--admin-user "<%= $admin_user %>" --admin-pass "<%= $admin_passwd %>"
+
+# Database population must succeed
+if [ "$?" != "0" ]; then
+  echo "Database installation failed!"
+  exit 1
+fi
+
+# Update config.php to reflect completed installation
+/bin/cat <%= $config_file %> | /bin/sed "s/'installed' => false/'installed' => true/g" > <%= $config_file %>
