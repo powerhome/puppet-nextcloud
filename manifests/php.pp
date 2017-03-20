@@ -44,5 +44,6 @@ class nextcloud::php {
           package_prefix => 'php-',
         },
     },
+    require       => Class['apache'],
   }
 }
