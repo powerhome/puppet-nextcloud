@@ -25,10 +25,10 @@ else
 
   # Database population must succeed
   if [ "$?" != "0" ]; then
-    echo -ne "FAILED"
+    echo -ne "FAILED\n"
     exit 1
   fi
-  echo -ne "SUCCESS"
+  echo -ne "SUCCESS\n"
 
   # Run the post install upgrade command
   echo -n "Upgrading Nextcloud database..."
@@ -36,10 +36,10 @@ else
 
   # Database upgrade must succeed
   if [ "$?" != "0" ]; then
-    echo -ne "FAILED"
+    echo -ne "FAILED\n"
     exit 1
   fi
-  echo -ne "SUCCESS"
+  echo -ne "SUCCESS\n"
 fi
 
 exit 0
