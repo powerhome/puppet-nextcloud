@@ -8,7 +8,7 @@ class nextcloud::install {
   # Create log file
   file { '/var/log/nextcloud.log':
     ensure => file,
-    mode   => '0644',
+    mode   => '0640',
     owner  => $::nextcloud::www_user,
     group  => $::nextcloud::www_group,
   }
@@ -19,7 +19,7 @@ class nextcloud::install {
     rotate       => 5,
     rotate_every => 'day',
     create       => true,
-    create_mode  => '0644',
+    create_mode  => '0640',
     create_owner => $::nextcloud::www_user,
     create_group => $::nextcloud::www_group,
   }
