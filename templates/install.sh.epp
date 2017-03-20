@@ -18,26 +18,28 @@ else
   set_uninstalled
 
   # Populate the database
+  echo -n "Installing Nextcloud database..."
   /usr/bin/occ maintenance:install --database "mysql" \
   --database-host "<%= $db_host %>" --database-name "<%= $db_name %>" --database-user "<%= $db_user %>" --database-pass "<%= $db_pass %>" \
-  --admin-user "<%= $admin_user %>" --admin-pass "<%= $admin_passwd %>"
+  --admin-user "<%= $admin_user %>" --admin-pass "<%= $admin_passwd %>" &> /dev/null
 
   # Database population must succeed
   if [ "$?" != "0" ]; then
-    echo "Database installation failed!"
+    echo -ne "FAILED"
     exit 1
   fi
-  echo "Database installation complete"
+  echo -ne "SUCCESS"
 
   # Run the post install upgrade command
-  /usr/bin/occ upgrade
+  echo -n "Upgrading Nextcloud database..."
+  /usr/bin/occ upgrade &> /dev/null
 
   # Database upgrade must succeed
   if [ "$?" != "0" ]; then
-    echo "Database upgrade failed!"
+    echo -ne "FAILED"
     exit 1
   fi
-  echo "Database upgrade complete"
+  echo "SUCCESS"
 fi
 
 exit 0
