@@ -52,7 +52,6 @@ class nextcloud::install {
         www_user  => $::nextcloud::www_user,
         www_group => $::nextcloud::www_group,
     }),
-    require => [Vcsrepo[$::nextcloud::docroot], Package['httpd']],
   }
 
   # Set ownership on the docroot
