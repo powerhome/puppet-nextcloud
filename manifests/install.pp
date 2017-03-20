@@ -1,11 +1,5 @@
 class nextcloud::install {
 
-  # Install Apache
-  class { 'apache':
-    default_vhost => false,
-    mpm_module    => 'prefork',
-  }
-
   # We need MySQL command line client
   package { 'mysql-client':
     ensure => present,
