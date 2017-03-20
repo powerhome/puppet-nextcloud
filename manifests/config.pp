@@ -21,5 +21,6 @@ class nextcloud::config {
         datastore_key    => $::nextcloud::datastore_key,
         datastore_secret => $::nextcloud::datastore_secret,
     }),
+    notify  => Service['httpd'],
   }
 }
