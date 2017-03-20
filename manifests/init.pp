@@ -26,8 +26,12 @@ class nextcloud(
   $config_file   = $::nextcloud::params::config_file,
 ) inherits nextcloud::params {
 
+  apt::key { $::nextcloud::php_ppa_key: }
+  apt::ppa { $::nextcloud::php_ppa:
+    require => Apt::Key[$::nextcloud::php_ppa_key],
+  }
+
   class { 'nextcloud::source': } ->
-  class { 'nextcloud::repo': } ->
   class { 'nextcloud::php': } ->
   class { 'nextcloud::apache': } ->
   class { 'nextcloud::config': } ->
