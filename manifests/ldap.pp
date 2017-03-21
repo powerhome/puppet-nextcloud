@@ -6,6 +6,7 @@ class nextcloud::ldap {
 
   # Setup LDAP configuration
   $::nextcloud::ldap_config.each |$key, $value| {
+    notify { "LDAP config: ${key} = ${value}": }
     nextcloud_ldap_config { $key:
       ensure => present,
       value  => $value,
