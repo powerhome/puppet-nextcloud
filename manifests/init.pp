@@ -36,5 +36,6 @@ class nextcloud(
   class { 'nextcloud::php': } ->
   class { 'nextcloud::config': } ->
   class { 'nextcloud::install': } ->
-  class { 'nextcloud::vhost': }
+  class { 'nextcloud::vhost': } ->
+  class { 'nextcloud::cron': }
 }
