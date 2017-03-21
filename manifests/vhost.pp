@@ -48,6 +48,7 @@ class nextcloud::vhost {
     manage_docroot  => false,
     servername      => $::nextcloud::www_url,
     ssl             => true,
+    override        => ['All'],
     ssl_cert        => $::nextcloud::ssl_cert_path,
     ssl_key         => $::nextcloud::ssl_key_path,
     ssl_ca          => $::nextcloud::ssl_cert_path,
@@ -55,7 +56,6 @@ class nextcloud::vhost {
       {
         path            => $::nextcloud::docroot,
         options         => ['+FollowSymLinks'],
-        allow_overide   => ['All'],
         directoryindex  => 'index.php',
         setenv          => [
           "HOME ${::nextcloud::docroot}",
