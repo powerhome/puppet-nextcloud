@@ -5,10 +5,10 @@ class nextcloud::ldap {
   }
 
   # Setup LDAP configuration
-  $::nextcloud::ldap_config.each |$config| {
-    nextcloud_ldap_config { $config['key']:
+  $::nextcloud::ldap_config.each |$key, $value| {
+    nextcloud_ldap_config { $key:
       ensure  => present,
-      value   => $config['value'],
+      value   => $value,
       require => Exec['ldap_config_init'],
     }
   }
