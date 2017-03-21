@@ -28,6 +28,7 @@ Puppet::Type.type(:nextcloud_ldap_config).provide(:occ) do
           )
         end
       end
+    end
     instances
   end
 
