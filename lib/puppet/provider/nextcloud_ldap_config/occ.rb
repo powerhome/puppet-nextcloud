@@ -33,10 +33,9 @@ Puppet::Type.type(:nextcloud_ldap_config).provide(:occ) do
   end
 
   def self.prefetch(resources)
-    ldap_config = instances
-    resources.keys.each do |name|
-      if provider = ldap_config.find{ |conf| conf.name == name }
-        resources[name].provider = provider
+    instances.each do |prov|
+      if resource = resources[prov.name]
+        resource.provider = prov
       end
     end
   end
