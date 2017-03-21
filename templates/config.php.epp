@@ -9,7 +9,7 @@ $CONFIG = array (
   'datadirectory' => '<%= $docroot %>/data',
   'overwrite.cli.url' => 'https://<%= $www_url %>',
   'dbtype' => 'mysql',
-  'version' => '<%= $repo_version %>',
+  'version' => '<%= $installed_version %>',
   'dbname' => '<%= $db_name %>',
   'dbhost' => '<%= $db_host %>',
   'dbport' => '',
