@@ -19,7 +19,6 @@ Puppet::Type.type(:nextcloud_ldap_config).provide(:occ) do
 
         # Ignore configuration title
         if key != 'Configuration'
-          notice("Discovered LDAP configuration: #{key} = #{value}")
 
           # New instance
           instances << new(
