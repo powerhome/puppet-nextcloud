@@ -10,7 +10,7 @@ Puppet::Type.type(:nextcloud_ldap_config).provide(:occ) do
     instances = []
 
     # Get the current LDAP configuration
-    config = occ('ldap:show-config')
+    config = occ('ldap:show-config').split("\n")
 
     # Process each LDAP configuration definition
     config.each do |line|
