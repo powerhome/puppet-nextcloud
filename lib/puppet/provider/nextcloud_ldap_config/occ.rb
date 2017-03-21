@@ -15,11 +15,11 @@ Puppet::Type.type(:nextcloud_ldap_config).provide(:occ) do
     # Process each LDAP configuration definition
     config.each do |line|
       if line =~ /^\| [a-zA-Z]/
-        notice("LDAP config line: #{line}")
         key, value = /^\|[ ]([^ ]*)[ ]*\|[ ]*([^ \|]*).*$/.match(line).captures
 
         # Ignore configuration title
         if key != 'Configuration'
+          notice("Discovered LDAP configuration: #{key} = #{value}")
 
           # New instance
           instances << new(
