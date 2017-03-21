@@ -15,6 +15,7 @@ class nextcloud(
   $instance_id,
   $instance_salt,
   $instance_secret,
+  $ldap_config,
   $repo_version  = $::nextcloud::params::repo_version,
   $repo_url      = $::nextcloud::params::repo_url,
   $docroot       = $::nextcloud::params::docroot,
@@ -38,5 +39,6 @@ class nextcloud(
   class { 'nextcloud::install': } ->
   class { 'nextcloud::vhost': } ->
   class { 'nextcloud::cron': } ->
-  class { 'nextcloud::apps': }
+  class { 'nextcloud::apps': } ->
+  class { 'nextcloud::ldap': }
 }
