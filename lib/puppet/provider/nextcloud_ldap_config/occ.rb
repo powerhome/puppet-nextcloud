@@ -44,6 +44,7 @@ Puppet::Type.type(:nextcloud_ldap_config).provide(:occ) do
   def create
     notice("Create: #{resource[:name]} -> #{resource[:value]}")
     occ(['ldap:set-config', 's01', resource[:name], resource[:value]])
+    @property_hash[:ensure] == :present
   end
 
   def exists?
