@@ -22,9 +22,10 @@ Puppet::Type.type(:nextcloud_ldap_config).provide(:occ) do
 
           # New instance
           instances << new(
-            :name   => key,
-            :ensure => :present,
-            :value  => value
+            :name     => key,
+            :ensure   => :present,
+            :value    => value,
+            :provider => :occ,
           )
         end
       end
