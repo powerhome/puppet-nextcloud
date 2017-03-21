@@ -3,7 +3,7 @@ Puppet::Type.newtype(:nextcloud_ldap_config) do
 
   ensurable
 
-  newparam(:name) do
+  newparam(:name, :namevar => true) do
     desc "The LDAP configuration directive name"
   end
 
