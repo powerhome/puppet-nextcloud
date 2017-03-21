@@ -10,4 +10,9 @@ Puppet::Type.newtype(:nextcloud_ldap_config) do
   newparam(:value) do
     desc "The value to set for the configuration directive"
   end
+
+  newparam(:config) do
+    desc 'LDAP configuration ID'
+    defaultto 's01'
+  end
 end
