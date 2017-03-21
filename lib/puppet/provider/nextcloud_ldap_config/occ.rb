@@ -11,6 +11,8 @@ Puppet::Type.type(:nextcloud_ldap_config).provide(:occ) do
   def self.instances
     instances = []
 
+    # Get the current LDAP configuration
+
     # Get all databases
     databases = ldapsearch('-Q', '-LLL', '-Y', 'EXTERNAL', '-b', 'cn=config', '-H', 'ldapi:///', "(olcDbNoSync=*)").split("\n\n")
 
