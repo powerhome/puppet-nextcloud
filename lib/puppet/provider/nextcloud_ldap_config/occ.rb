@@ -10,7 +10,7 @@ Puppet::Type.type(:nextcloud_ldap_config).provide(:occ) do
     instances = []
 
     # Get the current LDAP configuration
-    config = occ(['ldap:show-config', resource[:config], '--show-password']).split("\n")
+    config = occ(['ldap:show-config', 's01', '--show-password']).split("\n")
 
     # Process each LDAP configuration definition
     config.each do |line|
@@ -43,7 +43,7 @@ Puppet::Type.type(:nextcloud_ldap_config).provide(:occ) do
 
   def create
     notice("Create: #{resource[:name]} -> #{resource[:value]}")
-    occ(['ldap:set-config', resource[:config], resource[:name], resource[:value]])
+    occ(['ldap:set-config', 's01', resource[:name], resource[:value]])
   end
 
   def exists?
