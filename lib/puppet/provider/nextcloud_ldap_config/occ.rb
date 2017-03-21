@@ -42,6 +42,7 @@ Puppet::Type.type(:nextcloud_ldap_config).provide(:occ) do
   end
 
   def create
+    notice("Create: #{resource[:name]} -> #{resource[:value]}")
     occ(['ldap:set-config', 's01', resource[:name], resource[:value]])
   end
 
