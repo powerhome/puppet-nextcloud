@@ -45,5 +45,6 @@ class nextcloud(
   class { 'nextcloud::cron': } ->
   class { 'nextcloud::apps': } ->
   class { 'nextcloud::ldap': } ->
-  class { 'nextcloud::updates': }
+  class { 'nextcloud::updates': } ->
+  class { 'nextcloud::theme': }
 }
