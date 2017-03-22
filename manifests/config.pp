@@ -20,6 +20,11 @@ class nextcloud::config {
         datastore_url     => $::nextcloud::datastore_url,
         datastore_key     => $::nextcloud::datastore_key,
         datastore_secret  => $::nextcloud::datastore_secret,
+        mail_from         => $::nextcloud::mail_from,
+        mail_domain       => $::nextcloud::mail_domain,
+        mail_host         => $::nextcloud::mail_host,
+        mail_port         => $::nextcloud::mail_port,
+        mail_pass         => $::nextcloud::mail_pass,
     }),
     notify  => Service['httpd'],
   }
