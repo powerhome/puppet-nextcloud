@@ -6,9 +6,9 @@ class nextcloud::ldap {
 
   # Setup LDAP configuration
   $::nextcloud::ldap_config.each |$key, $value| {
-    nextcloud_ldap_config { $key:
-      ensure => present,
-      value  => $value,
+    exec { "ldap_config_${key}":
+      command => "/usr/bin/occ ldap:set-config s01 ${key} ${value}",
+      unless  => "/usr/bin/test ! -z \"$(/usr/bin/occ ldap:show-config s01 | /bin/grep -E '${key}[ ]' | /bin/grep -E '[ ]${value}[ ]')\"",
     }
   }
 }
