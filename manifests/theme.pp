@@ -6,11 +6,11 @@ class nextcloud::theme {
     unless  => "/usr/bin/test ! -z \"$(/usr/bin/occ config:app:get theming name | grep '${::nextcloud::theme_name}')\"",
   }
 
-  # Theme slogan
-  exec { 'nextcloud_theme_slogan':
-    command => "/usr/bin/occ config:app:set theming slogan --value='${::nextcloud::theme_slogan}'",
-    unless  => "/usr/bin/test ! -z \"$(/usr/bin/occ config:app:get theming slogan | grep '${::nextcloud::theme_slogan}')\"",
-  }
+  # Theme slogan (this does not work because of spaces)
+  #exec { 'nextcloud_theme_slogan':
+  #  command => "/usr/bin/occ config:app:set theming slogan --value='${::nextcloud::theme_slogan}'",
+  #  unless  => "/usr/bin/test ! -z \"$(/usr/bin/occ config:app:get theming slogan | grep '${::nextcloud::theme_slogan}')\"",
+  #}
 
   # Theme URL
   exec { 'nextcloud_theme_url':
