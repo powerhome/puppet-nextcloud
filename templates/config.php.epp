@@ -40,7 +40,7 @@ $CONFIG = array (
   'versions_retention_obligation' => 'auto',
   'logfile' => '/var/log/nextcloud.log',
   'updater.release.channel' => 'production',
-  'mail_smtpsecure' => 'ssl',
+  'mail_smtpsecure' => 'tls',
   'mail_smtpauthtype' => 'LOGIN',
   'mail_smtpauth' => 1,
   'mail_smtphost' => '<%= $mail_host %>',
