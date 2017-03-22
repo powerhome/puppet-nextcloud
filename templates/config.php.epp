@@ -39,4 +39,5 @@ $CONFIG = array (
   'memcache.local' => '\\OC\\Memcache\\APCu',
   'versions_retention_obligation' => 'auto',
   'logfile' => '/var/log/nextcloud.log',
+  'updater.release.channel' => 'production',
 );
