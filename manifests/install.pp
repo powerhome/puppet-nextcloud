@@ -34,6 +34,23 @@ class nextcloud::install {
     }),
   }
 
+  # Data htaccess
+  file { "${::nextcloud::docroot}/data/.htaccess":
+    ensure  => file,
+    mode    => '0644',
+    owner   => $::nextcloud::www_user,
+    group   => $::nextcloud::www_group,
+    content => epp('nextcloud/data_htaccess.epp'),
+  }
+
+  # OC data file
+  file { "${::nextcloud::docroot}/data/.ocdata":
+    ensure => file,
+    mode   => '0640',
+    owner  => $::nextcloud::www_user,
+    group  => $::nextcloud::www_group,
+  }
+
   # Installation script
   file { $::nextcloud::install_script:
     ensure  => file,
