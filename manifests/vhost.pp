@@ -33,12 +33,32 @@ class nextcloud::vhost {
 
   # Redirect requests to SSL
   apache::vhost { 'nextcloud-http':
-    servername      => $::nextcloud::www_url,
-    port            => '80',
+    port            => '443',
     docroot         => $::nextcloud::docroot,
     manage_docroot  => false,
-    redirect_status => 'permanent',
-    redirect_dest   => "https://${::nextcloud::www_url}/",
+    servername      => $::nextcloud::www_url,
+    directories     => [
+      {
+        path            => $::nextcloud::docroot,
+        options         => ['+FollowSymLinks'],
+        allow_override  => ['All'],
+        directoryindex  => 'index.php',
+        setenv          => [
+          "HOME ${::nextcloud::docroot}",
+          "HTTP_HOME ${::nextcloud::docroot}"
+        ],
+        custom_fragment => join([
+          '',
+          '    <IfModule mod_dav.c>',
+          '      Dav off',
+          '    </IfModule>'
+        ], "\n"),
+      },
+    ],
+    headers         => [
+      'always set Strict-Transport-Security "max-age=15552000; includeSubDomains; preload"',
+    ],
+    custom_fragment => 'AddType application/x-httpd-php .php',
     require         => [File[$::nextcloud::ssl_cert_path], File[$::nextcloud::ssl_key_path]],
   }
 
