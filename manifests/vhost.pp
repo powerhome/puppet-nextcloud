@@ -33,7 +33,7 @@ class nextcloud::vhost {
 
   # Redirect requests to SSL
   apache::vhost { 'nextcloud-http':
-    port            => '443',
+    port            => '80',
     docroot         => $::nextcloud::docroot,
     manage_docroot  => false,
     servername      => $::nextcloud::www_url,
