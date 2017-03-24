@@ -25,6 +25,8 @@ class nextcloud::config {
         mail_host         => $::nextcloud::mail_host,
         mail_port         => $::nextcloud::mail_port,
         mail_pass         => $::nextcloud::mail_pass,
+        redis_server      => $::nextcloud::redis_server,
+        redis_port        => $::nextcloud::redis_port,
     }),
     notify  => Service['httpd'],
   }
