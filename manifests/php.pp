@@ -26,6 +26,7 @@ class nextcloud::php {
         xmlrpc    => {},
         curl      => {},
         mbstring  => {},
+        redis     => {},
         intl      => {},
         mcrypt    => {},
         imap      => {},
