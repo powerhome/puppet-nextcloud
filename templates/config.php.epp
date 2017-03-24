@@ -37,6 +37,12 @@ $CONFIG = array (
   ),
   'loglevel' => 1,
   'memcache.local' => '\\OC\\Memcache\\APCu',
+  'memcache.distributed' => '\\OC\\Memcache\\Redis',
+  'memcache.locking' => '\\OC\\Memcache\\Redis',
+  'redis' => array(
+    'host' => '<%= $redis_server %>',
+    'port' => '<%= $redis_port %>',
+  ),
   'versions_retention_obligation' => 'auto',
   'logfile' => '/var/log/nextcloud.log',
   'updater.release.channel' => 'production',
