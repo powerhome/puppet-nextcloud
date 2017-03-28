@@ -27,6 +27,7 @@ class nextcloud(
   $mail_pass,
   $redis_server,
   $redis_port,
+  $apps,
   $repo_version  = $::nextcloud::params::repo_version,
   $repo_url      = $::nextcloud::params::repo_url,
   $docroot       = $::nextcloud::params::docroot,
