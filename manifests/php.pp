@@ -14,6 +14,7 @@ class nextcloud::php {
         'PHP/memory_limit'        => '512M',
         'PHP/post_max_size'       => '1100M',
         'PHP/upload_max_filesize' => '1000M',
+        'Date/date.timezone'      => $::nextcloud::php_timezone,
     },
     extensions    => {
         mysql     => {

@@ -28,6 +28,7 @@ class nextcloud(
   $redis_server,
   $redis_port,
   $apps,
+  $php_timezone,
   $repo_version  = $::nextcloud::params::repo_version,
   $repo_url      = $::nextcloud::params::repo_url,
   $docroot       = $::nextcloud::params::docroot,
