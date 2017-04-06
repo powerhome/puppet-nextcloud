@@ -22,6 +22,7 @@ class nextcloud::cron {
       command => "/usr/bin/mysql -u ${::nextcloud::db_user} -p${::nextcloud::db_pass} -h ${::nextcloud::db_host} -e \"delete from ${::nextcloud::db_name}.oc_bruteforce_attempts\"",
       user    => 'root',
       hour    => 1,
+      minute  => 0,
     }
   }
 }
