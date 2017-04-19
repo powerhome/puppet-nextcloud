@@ -11,7 +11,7 @@ class nextcloud::cron {
   exec { 'nextcloud_cron':
     command => '/usr/bin/occ background:cron',
     unless  => '/usr/bin/test ! -z "$(/usr/bin/occ config:list | grep \'"backgroundjobs_mode": "cron"\')"',
-    require => Cron['nextcloud'],
+    #require => Cron['nextcloud'],
   }
 
   # Cron job for cleaning up bruteforce attempts table
