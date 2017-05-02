@@ -12,6 +12,6 @@ class nextcloud::source {
     checksum_type => 'sha256',
     extract       => true,
     extract_path  => $::nextcloud::docroot,
-    creates       => "${::nextcloud::docroot}/nextcloud",
+    creates       => $::nextcloud::docroot,
   }
 }
