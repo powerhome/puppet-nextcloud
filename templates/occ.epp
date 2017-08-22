@@ -1,3 +1,7 @@
 #!/bin/bash
+<%- if $deploy_method == 'docker' { %>
+docker exec --user www-data nextcloud php occ $@
+<%- } else { -%>
 cd <%= $docroot %>
 sudo -u <%= $www_user %> ./occ $@
+<%- } -%>

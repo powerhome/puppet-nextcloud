@@ -1,5 +1,29 @@
 class nextcloud::config {
 
+  case $nextcloud::deploy_method {
+    default: {
+      $nextcloud_service = 'httpd'
+    }
+    'docker': {
+      $nextcloud_service = 'docker_nextcloud'
+    }
+  }
+
+  file { $nextcloud::base_dir:
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+
+  file { $nextcloud::config_dir:
+    ensure  => directory,
+    owner   => $::nextcloud::www_user,
+    group   => $::nextcloud::www_group,
+    mode    => '0755',
+    require => File[$base_dir],
+  }
+
   # Deploy the NextCloud configuration
   file { $::nextcloud::config_file:
     ensure  => file,
@@ -12,6 +36,7 @@ class nextcloud::config {
         www_url           => $::nextcloud::www_url,
         docroot           => $::nextcloud::docroot,
         installed_version => $::nextcloud::installed_version,
+        db_type           => $::nextcloud::db_type,
         db_name           => $::nextcloud::db_name,
         db_user           => $::nextcloud::db_user,
         db_pass           => $::nextcloud::db_pass,
@@ -28,6 +53,6 @@ class nextcloud::config {
         redis_server      => $::nextcloud::redis_server,
         redis_port        => $::nextcloud::redis_port,
     }),
-    notify  => Service['httpd'],
+    notify  => Service[$::nextcloud::service_name],
   }
 }
