@@ -19,5 +19,8 @@ class nextcloud::params {
     'ssl',
     'headers',
     'rewrite',
-  ]
+  ],
+  $apache_disabled_mods = [
+    'reqtimeout',
+  ],
 }
