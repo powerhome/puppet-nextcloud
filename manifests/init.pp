@@ -61,7 +61,6 @@ class nextcloud(
   }
   $data_dir = "${docroot}/data"
 
-  class { 'nextcloud::config': } ->
   class { 'nextcloud::service': }
   # class { 'nextcloud::cron': } ->
   # class { 'nextcloud::apps': } ->

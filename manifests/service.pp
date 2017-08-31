@@ -23,6 +23,7 @@ class nextcloud::service {
 
   case $nextcloud::deploy_method {
     default: {
+      class { 'nextcloud::config': } ->
       class { 'mysql::client': } ->
       class { 'nextcloud::source': } ->
       class { 'nextcloud::apache': } ->

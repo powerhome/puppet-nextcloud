@@ -16,13 +16,31 @@ class nextcloud::docker {
   }
 
   docker::run { 'nextcloud':
-    image   => 'nextcloud',
-    ports   => [ '80:80' ],
+    image   => 'wonderfall/nextcloud:11.0_beta',
+    ports   => [ '80:8888' ],
     volumes => [
-      "${::nextcloud::config_dir}:/var/www/html/config",
-      "${::nextcloud::base_dir}/data:/var/www/html/data",
+      '/opt/nextcloud_config:/config',
+      '/opt/nextcloud/data:/data',
     ],
-    require => Docker::Image['nextcloud'],
+    env     => [
+      'UPLOAD_MAX_SIZE=10G',
+      'APC_SHM_SIZE=128M',
+      'OPCACHE_MEM_SIZE=128',
+      'CRON_PERIOD=15m',
+      "TZ=${nextcloud::php_timezone}",
+      "DOMAIN=${nextcloud::www_url}",
+      "DATASTORE_BUCKET=${nextcloud::datastore_bucket}",
+      "DATASTORE_KEY=${nextcloud::datastore_key}",
+      "DATASTORE_SECRET=${nextcloud::datastore_secret}",
+      "DATASTORE_HOST=${s3_storage_vip}",
+      "DB_TYPE=${nextcloud::db_type}",
+      "DB_NAME=${nextcloud::db_name}",
+      "DB_USER=${nextcloud::db_user}",
+      "DB_PASSWORD=${nextcloud::db_pass}",
+      "DB_HOST=${nextcloud::db_host}",
+      "ADMIN_USER=${nextcloud::admin_user}",
+      "ADMIN_PASSWORD=${nextcloud::admin_passwd}",
+    ], require => Docker::Image['nextcloud'],
   }
 
 }
