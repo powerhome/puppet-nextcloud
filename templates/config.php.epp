@@ -8,14 +8,15 @@ $CONFIG = array (
   ),
   'datadirectory' => '<%= $docroot %>/data',
   'overwrite.cli.url' => 'https://<%= $www_url %>',
-  'dbtype' => 'mysql',
+  'dbtype' => '<%= $db_type %>',
   'version' => '<%= $installed_version %>',
+<%- if $db_name { -%>
   'dbname' => '<%= $db_name %>',
   'dbhost' => '<%= $db_host %>',
   'dbport' => '',
-  'dbtableprefix' => 'oc_',
   'dbuser' => '<%= $db_user %>',
   'dbpassword' => '<%= $db_pass %>',
+<%- } -%>
   'logtimezone' => 'UTC',
   'installed' => true,
   'ldapIgnoreNamingRules' => false,
@@ -23,6 +24,7 @@ $CONFIG = array (
   'mail_smtpmode' => 'smtp',
   'mail_from_address' => '<%= $mail_from %>',
   'mail_domain' => '<%= $mail_domain %>',
+<%- if $datastore_bucket { -%>
   'objectstore' => array (
     'class' => 'OC\\Files\\ObjectStore\\S3',
     'arguments' => array (
@@ -35,7 +37,9 @@ $CONFIG = array (
       'use_path_style' => true,
     ),
   ),
+<%- } -%>
   'loglevel' => 1,
+<%- if $redis_server { -%>
   'memcache.local' => '\\OC\\Memcache\\Redis',
   'memcache.distributed' => '\\OC\\Memcache\\Redis',
   'memcache.locking' => '\\OC\\Memcache\\Redis',
@@ -43,6 +47,7 @@ $CONFIG = array (
     'host' => '<%= $redis_server %>',
     'port' => '<%= $redis_port %>',
   ),
+<%- } -%>
   'versions_retention_obligation' => 'auto',
   'logfile' => '/var/log/nextcloud.log',
   'updater.release.channel' => 'production',
