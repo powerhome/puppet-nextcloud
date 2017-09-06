@@ -10,6 +10,8 @@ class nextcloud::php {
     apache_config => true,
     settings      => {
         'PHP/error_log'                           => '/var/log/apache2/php_errors.log',
+        'Session/session.save_handler'            => $::nextcloud::php_session_save_handler,
+        'Session/session.save_path'               => $::nextcloud::php_session_save_path,
         'PHP/max_execution_time'                  => '3500',
         'PHP/max_input_time'                      => '3600',
         'PHP/memory_limit'                        => '512M',
