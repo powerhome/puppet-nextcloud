@@ -9,6 +9,7 @@ class nextcloud::php {
     composer      => false,
     apache_config => true,
     settings      => {
+        'PHP/error_log'                           => '/var/log/apache2/php_errors.log',
         'PHP/max_execution_time'                  => '3500',
         'PHP/max_input_time'                      => '3600',
         'PHP/memory_limit'                        => '512M',
