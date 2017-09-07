@@ -16,7 +16,7 @@ class nextcloud::params {
   $php_ppa                  = 'ppa:ondrej/php'
   $php_ppa_key              = '14AA40EC0831756756D7F66C4F4EA0AAE5267A6C'
   $php_session_save_handler = 'files'
-  $php_session_save_path    = '/var/lib/php/sessions',
+  $php_session_save_path    = '/var/lib/php/sessions'
   $apache_enabled_mods      = [
     'ssl',
     'headers',
