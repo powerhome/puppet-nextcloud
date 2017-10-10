@@ -20,6 +20,7 @@ class nextcloud(
   $theme_name,
   $theme_slogan,
   $theme_url,
+  $temp_directory,
   $mail_from,
   $mail_domain,
   $mail_host,
