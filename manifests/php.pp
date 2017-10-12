@@ -17,6 +17,7 @@ class nextcloud::php {
         'PHP/memory_limit'                        => '512M',
         'PHP/post_max_size'                       => '1100M',
         'PHP/upload_max_filesize'                 => '1000M',
+        'PHP/upload_tmp_dir'                      => $::nextcloud::temp_directory,
         'Date/date.timezone'                      => $::nextcloud::php_timezone,
         'opcache/opcache.enable'                  => '1',
         'opcache/opcache.enable_cli'              => '1',

@@ -53,4 +53,5 @@ $CONFIG = array (
   'mail_smtpport' => '<%= $mail_port %>',
   'mail_smtpname' => '<%= $mail_from %>',
   'mail_smtppassword' => '<%= $mail_pass %>',
+  'tempdirectory' => '<%= $temp_directory %>',
 );
