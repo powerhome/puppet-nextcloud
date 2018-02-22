@@ -1,6 +1,6 @@
 class nextcloud::params {
   $repo_version             = '12.0.5'
-  $installed_version        = '12.0.5.0'
+  $installed_version        = '12.0.5.3'
   $repo_url                 = 'git://github.com/nextcloud/server.git'
   $docroot                  = '/var/www/nextcloud'
   $data_dir                 = "${docroot}/data"
