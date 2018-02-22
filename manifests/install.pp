@@ -14,7 +14,7 @@ class nextcloud::install {
   }
 
   # make sure the temp directory exists and we can write it
-  file { $temp_directory:
+  file { $nextcloud::temp_directory:
     ensure => directory,
     mode   => '0750',
     owner  => $::nextcloud::www_user,
