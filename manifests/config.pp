@@ -1,5 +1,13 @@
 class nextcloud::config {
 
+  # make sure the temp directory exists and we can write it
+  file { $nextcloud::temp_directory:
+    ensure => directory,
+    mode   => '0750',
+    owner  => $::nextcloud::www_user,
+    group  => $::nextcloud::www_group,
+  }
+
   # Deploy the NextCloud configuration
   file { $::nextcloud::config_file:
     ensure  => file,
@@ -30,5 +38,6 @@ class nextcloud::config {
         temp_directory    => $::nextcloud::temp_directory,
     }),
     notify  => Service['httpd'],
+    require => File[$nextcloud::temp_directory],
   }
 }

@@ -13,14 +13,6 @@ class nextcloud::install {
     group  => $::nextcloud::www_group,
   }
 
-  # make sure the temp directory exists and we can write it
-  file { $nextcloud::temp_directory:
-    ensure => directory,
-    mode   => '0750',
-    owner  => $::nextcloud::www_user,
-    group  => $::nextcloud::www_group,
-  }
-
   # Log rotation
   logrotate::rule { 'nextcloud':
     path         => '/var/log/nextcloud.log',
