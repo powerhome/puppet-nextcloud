@@ -3,7 +3,8 @@ $CONFIG = array (
   'instanceid' => '<%= $instance_id %>',
   'passwordsalt' => '<%= $instance_salt %>',
   'secret' => '<%= $instance_secret %>',
-  'trusted_domains' => array (
+  'trusted_domains' =>
+  array (
     0 => '<%= $www_url %>',
   ),
   'datadirectory' => '<%= $docroot %>/data',
@@ -23,9 +24,11 @@ $CONFIG = array (
   'mail_smtpmode' => 'smtp',
   'mail_from_address' => '<%= $mail_from %>',
   'mail_domain' => '<%= $mail_domain %>',
-  'objectstore' => array (
+  'objectstore' =>
+  array (
     'class' => 'OC\\Files\\ObjectStore\\S3',
-    'arguments' => array (
+    'arguments' =>
+    array (
       'bucket' => '<%= $datastore_bucket %>',
       'autocreate' => false,
       'key' => '<%= $datastore_key %>',
@@ -39,7 +42,8 @@ $CONFIG = array (
   'memcache.local' => '\\OC\\Memcache\\Redis',
   'memcache.distributed' => '\\OC\\Memcache\\Redis',
   'memcache.locking' => '\\OC\\Memcache\\Redis',
-  'redis' => array(
+  'redis' =>
+  array(
     'host' => '<%= $redis_server %>',
     'port' => '<%= $redis_port %>',
   ),
@@ -54,4 +58,5 @@ $CONFIG = array (
   'mail_smtpname' => '<%= $mail_from %>',
   'mail_smtppassword' => '<%= $mail_pass %>',
   'tempdirectory' => '<%= $temp_directory %>',
+  'updatechecker' => false,
 );
