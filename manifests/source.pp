@@ -6,7 +6,7 @@ class nextcloud::source {
   # Download and install the specified version
   archive { $install_file:
     ensure        => present,
-    name          => "/var/tmp/${install_file}",
+    path          => "/var/tmp/${install_file}",
     source        => $source,
     checksum      => $sha256sum,
     checksum_type => 'sha256',
